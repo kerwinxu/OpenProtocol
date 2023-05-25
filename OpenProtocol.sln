@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OpenProtocol", "OpenProtocol\OpenProtocol.shproj", "{EF259794-7C15-4773-84E8-B9DA090999D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo", "Demo\Demo.csproj", "{BFD7427F-793E-41B5-9E74-71AAF4136754}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject1", "TestProject1\TestProject1.csproj", "{ED5B1C3B-5B75-48FD-81BC-0D73F4CA2F69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{441774A2-A330-4859-B350-DE1F0E4E2DBD}"
+	ProjectSection(SolutionItems) = preProject
+		apache-2.0.txt = apache-2.0.txt
+		LICENSE.mkd = LICENSE.mkd
+		Readme.mkd = Readme.mkd
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFD7427F-793E-41B5-9E74-71AAF4136754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFD7427F-793E-41B5-9E74-71AAF4136754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFD7427F-793E-41B5-9E74-71AAF4136754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFD7427F-793E-41B5-9E74-71AAF4136754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED5B1C3B-5B75-48FD-81BC-0D73F4CA2F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED5B1C3B-5B75-48FD-81BC-0D73F4CA2F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED5B1C3B-5B75-48FD-81BC-0D73F4CA2F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED5B1C3B-5B75-48FD-81BC-0D73F4CA2F69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {52B42377-6A58-4FDB-8977-B30CA2202190}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		OpenProtocol\OpenProtocol.projitems*{bfd7427f-793e-41b5-9e74-71aaf4136754}*SharedItemsImports = 5
+		OpenProtocol\OpenProtocol.projitems*{ed5b1c3b-5b75-48fd-81bc-0d73f4ca2f69}*SharedItemsImports = 5
+		OpenProtocol\OpenProtocol.projitems*{ef259794-7c15-4773-84e8-b9da090999d2}*SharedItemsImports = 13
+	EndGlobalSection
+EndGlobal
