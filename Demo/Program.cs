@@ -58,6 +58,7 @@ namespace Demo
             var datas2 = (new BytesSerializer<TestClass>()).Serialize(testClass);
             Console.WriteLine($"{Enumerable.SequenceEqual(datas, datas2)}");
 
+            
         }
     }
 }

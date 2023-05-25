@@ -108,7 +108,8 @@ namespace Io.Github.KerwinXu.OpenProtocol
                             var arr = propertyInfo.GetValue(result) as Array;
                             if(arr == null)
                             {
-                                // TODO 异常，数组不知道长度
+                                // 异常，数组不知道长度
+                                throw new UnknownArrayLength();
                             }
                             else
                             {
@@ -176,7 +177,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                         var data3 = data.Skip(check_start).Take(check_end + check_count - check_start).ToArray();
                         // 计算出校验
                         var data4 = ((Check)check).Compute(data3); // 
-                        // TODO 然后比较，请注意，这里比较的是字节数组，data4先转成字节数组。
+                        // 然后比较，请注意，这里比较的是字节数组，data4先转成字节数组。
                         var data5 = objectToBytes(data4);
                         if (BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data5);
                         // 然后判断
@@ -333,7 +334,8 @@ namespace Io.Github.KerwinXu.OpenProtocol
             if (byte_count == 4 && isSigned) return typeof(int);
             if (byte_count == 8 && !isSigned) return typeof(long);
             if (byte_count == 8 && isSigned) return typeof(ulong);
-            // TODO 这里要发出错误
+            // 这里要发出错误
+            throw new UnknownType(byte_count, isSigned);
             return null;
         }
 
@@ -457,7 +459,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                         var data3 = result.Skip(check_start).Take(check_end + check_count - check_start).ToArray();
                         // 计算出校验
                         var data4 = ((Check)check).Compute(data3); // 
-                        // TODO 然后比较，请注意，这里比较的是字节数组，data4先转成字节数组。
+                        // 然后比较，请注意，这里比较的是字节数组，data4先转成字节数组。
                         var data5 = objectToBytes(data4);
                         if (BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data5);
                         // 

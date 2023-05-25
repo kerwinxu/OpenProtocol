@@ -9,13 +9,14 @@
     <Import_RootNamespace>Io.Github.KerwinXu.OpenProtocol</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Readme.mkd" />
     <None Include="$(MSBuildThisFileDirectory)ReadMe.old.mkd" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\Check.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\Checks\CheckCRC32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\Checks\CheckCRC8.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\UnknownArrayLength.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\UnknownType.cs" />
     <Compile Include="..\OpenProtocol\Attributes\Checks\CheckCRC16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\Checks\CheckSum.cs" />
     <Compile Include="..\OpenProtocol\Attributes\DataItem.cs" />
