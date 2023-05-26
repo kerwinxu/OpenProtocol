@@ -93,7 +93,9 @@ namespace Io.Github.KerwinXu.OpenProtocol
                     PropertyInfo propertyInfo = item as PropertyInfo;
                     bool isBigEndian = false;     // 字节序大小端
                     double scale = 0;             // 放大倍数
-                    Type type1 = getPropertyType(propertyInfo, ref isBigEndian, ref scale);  // 类型。
+                    Type type_protocol = getPropertyType(propertyInfo, ref isBigEndian, ref scale);  // 类型。
+                    Type type2 = propertyInfo.PropertyType; // 这个是实体中真实的类型
+                    if (type2.IsArray) type2 = type2.GetElementType(); // 如果是数组，就取得元素的类型。
 
                     // 2. 占用的字节数，有时候指定的类型不一定是属性中的类型。
                     int count = 0;
@@ -113,13 +115,13 @@ namespace Io.Github.KerwinXu.OpenProtocol
                             }
                             else
                             {
-                                count = arr.Length * sizeOfByType(propertyInfo.PropertyType.GetElementType());
+                                count = arr.Length * sizeOfByType(type_protocol);
                             }
                         }
                         else
                         {
                             // 如果不是数组类型
-                            count = sizeOfByType(propertyInfo.PropertyType);  // 这个类型的长度
+                            count = sizeOfByType(type_protocol);  // 这个类型的长度
                         }
                     }
 
@@ -134,18 +136,20 @@ namespace Io.Github.KerwinXu.OpenProtocol
                     {
                         // 数组的话，要循环
                         var arr = propertyInfo.GetValue(result) as Array; // 转换成数组
-                        var persize = sizeOfByType(type1);                // 每个占用的长度
+                        var persize = sizeOfByType(type_protocol);                // 每个占用的长度
                         // 这里要看看这个数组是否有空间
                         if (arr == null)
                         {
-                            arr = Array.CreateInstance(type1, count / persize);  // 动态创建数组
+                            arr = Array.CreateInstance(type_protocol, count / persize);  // 动态创建数组
                             propertyInfo.SetValue(result, arr);                  // 赋值
                         }
                         // 遍历赋值
                         for (int i = 0; i < arr.Length; i++)
                         {
                             // 计算
-                            var obj = bytesToObject(data2.Skip(i * persize).Take(persize).ToArray(), type1, isBigEndian);
+                            var obj = bytesToObject(data2.Skip(i * persize).Take(persize).ToArray(), type_protocol, isBigEndian, scale);
+                            // 这里转换格式
+                            obj = Convert.ChangeType(obj, type2);
                             // 然后赋值
                             arr.SetValue(obj, i);  
                         }
@@ -154,7 +158,10 @@ namespace Io.Github.KerwinXu.OpenProtocol
                     else
                     {
                         // 这里设置单个值
-                        propertyInfo.SetValue(result, bytesToObject(data2, type1, isBigEndian));
+                        var obj = bytesToObject(data2, type_protocol, isBigEndian, scale);
+                        // 这里转换格式
+                        obj = Convert.ChangeType(obj, type2);
+                        propertyInfo.SetValue(result, obj);
 
                     }
                     // 下一个。
@@ -217,19 +224,19 @@ namespace Io.Github.KerwinXu.OpenProtocol
 
         }
 
-        public object bytesToObject(byte[]data, Type type, bool isBigEndian)
+        public object bytesToObject(byte[]data, Type type, bool isBigEndian, double scale)
         {
             if (isBigEndian ^ BitConverter.IsLittleEndian) { Array.Reverse(data); } // 如果是大端，就反转
             // 然后根据类型返回相关的值
-            if (type == typeof(byte)) return data[0];
-            if (type == typeof(sbyte)) return data[0];
-            if (type == typeof(ushort)) return BitConverter.ToUInt16(data);
-            if (type == typeof(short)) return BitConverter.ToInt16(data);
-            if (type == typeof(uint)) return BitConverter.ToUInt32(data);
-            if (type == typeof(int)) return BitConverter.ToInt32(data);
-            if (type == typeof(ulong)) return BitConverter.ToUInt64(data);
-            if (type == typeof(long)) return BitConverter.ToInt64(data);
-            if (type == typeof(float)) return BitConverter.ToSingle(data);
+            if (type == typeof(byte)) return  data[0] / scale;
+            if (type == typeof(sbyte)) return data[0] / scale;
+            if (type == typeof(ushort)) return BitConverter.ToUInt16(data) / scale;
+            if (type == typeof(short)) return BitConverter.ToInt16(data) / scale;
+            if (type == typeof(uint)) return BitConverter.ToUInt32(data) / scale;
+            if (type == typeof(int)) return BitConverter.ToInt32(data) / scale;
+            if (type == typeof(ulong)) return BitConverter.ToUInt64(data) / scale;
+            if (type == typeof(long)) return BitConverter.ToInt64(data) / scale;
+            if (type == typeof(float)) return BitConverter.ToSingle(data) / scale;
             
 
             return null;
@@ -246,6 +253,8 @@ namespace Io.Github.KerwinXu.OpenProtocol
         /// <exception cref="NoAttributeExistsException"></exception>
         private bool getPropertyBytesCount(PropertyInfo propertyInfo, Type type, T t, ref int count)
         {
+            // 首先判断是否有基本的数据类型。
+
             // 取得基本的数据类型。
             Type elementType = propertyInfo.PropertyType;
             if (propertyInfo.PropertyType.IsArray) elementType = propertyInfo.PropertyType.GetElementType(); // 如果是数组，就取得数组的项目类型

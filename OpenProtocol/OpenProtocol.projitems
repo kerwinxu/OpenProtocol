@@ -12,6 +12,7 @@
     <None Include="$(MSBuildThisFileDirectory)ReadMe.old.mkd" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\BasicType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\Check.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\Checks\CheckCRC32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Attributes\Checks\CheckCRC8.cs" />

@@ -7,7 +7,7 @@ namespace Io.Github.KerwinXu.OpenProtocol.Attributes
     /// <summary>
     /// 整数类型
     /// </summary>
-    public  class IntType:Attribute
+    public  class IntType:BasicType
     {
         /// <summary>
         /// 字节数，1，2，4
@@ -26,10 +26,11 @@ namespace Io.Github.KerwinXu.OpenProtocol.Attributes
         public double Scale { get; set; }
 
 
-        public IntType(int bytesCount, bool isSigned)
+        public IntType(int bytesCount, bool isSigned, double scale=1)
         {
             BytesCount = bytesCount;
             IsSigned = isSigned;
+            Scale = scale;
         }
     }
 }

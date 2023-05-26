@@ -5,9 +5,9 @@ using System.Text;
 namespace Io.Github.KerwinXu.OpenProtocol.Attributes
 {
     /// <summary>
-    /// 浮点数类型
+    /// 基本的数据类型
     /// </summary>
-    public  class FloatType: BasicType
+    public  class BasicType:Attribute
     {
 
     }

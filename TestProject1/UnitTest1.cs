@@ -1,4 +1,7 @@
+using Io.Github.KerwinXu.OpenProtocol;
+using Io.Github.KerwinXu.OpenProtocol.Attributes;
 using Io.Github.KerwinXu.OpenProtocol.Attributes.Checks;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Runtime.Intrinsics.Arm;
 
@@ -17,6 +20,8 @@ namespace TestProject1
             Assert.AreEqual((ushort)0x2ba1, (ushort)crc16_result);
 
         }
+
+
         [TestMethod]
         public void TestCRC32()
         {
@@ -25,6 +30,23 @@ namespace TestProject1
             byte[] datas = { 1, 2, 3, 4 };
             var crc32_result = crc32.Compute(datas);
             Assert.AreEqual((uint)0x793737cd, (uint)crc32_result);
+        }
+
+
+        class TestScale1
+        {
+            [DataItem(0)]
+            [IntType(2,true,10)]
+            public float data { get; set; }
+        }
+
+        [TestMethod]
+        public void TestScale()
+        {
+            byte[] datas = { 01, 02 };
+            TestScale1 testClass = (new BytesSerializer<TestScale1>()).Deserialize(datas);
+            Assert.AreEqual(25.8f, testClass.data, 0.01);
+
         }
     }
 }
