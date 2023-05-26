@@ -3,6 +3,7 @@ using Io.Github.KerwinXu.OpenProtocol.Attributes;
 using Io.Github.KerwinXu.OpenProtocol.Attributes.Checks;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using System.Runtime.Intrinsics.Arm;
 
 namespace TestProject1
@@ -46,6 +47,8 @@ namespace TestProject1
             byte[] datas = { 01, 02 };
             TestScale1 testClass = (new BytesSerializer<TestScale1>()).Deserialize(datas);
             Assert.AreEqual(25.8f, testClass.data, 0.01);
+            byte[] datas2 = (new BytesSerializer<TestScale1>()).Serialize(testClass);
+            Assert.IsTrue(Enumerable.SequenceEqual(datas, datas2));
 
         }
     }

@@ -96,3 +96,6 @@ E:\onedrive\project\c#\OpenProtocol\TestProject1\obj\Debug\net6.0\refint\TestPro
 E:\onedrive\project\c#\OpenProtocol\TestProject1\obj\Debug\net6.0\TestProject1.pdb
 E:\onedrive\project\c#\OpenProtocol\TestProject1\obj\Debug\net6.0\TestProject1.genruntimeconfig.cache
 E:\onedrive\project\c#\OpenProtocol\TestProject1\obj\Debug\net6.0\ref\TestProject1.dll
+E:\onedrive\project\c#\OpenProtocol\TestProject1\bin\Debug\net6.0\CoverletSourceRootsMapping
+E:\onedrive\project\c#\OpenProtocol\TestProject1\bin\Debug\net6.0\LibOpenProtocol.dll
+E:\onedrive\project\c#\OpenProtocol\TestProject1\bin\Debug\net6.0\LibOpenProtocol.pdb

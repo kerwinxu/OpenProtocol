@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net48;net40</TargetFrameworks>
+	  <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>OpenProtocol</Title>
+    <PackageProjectUrl>https://github.com/kerwinxu/OpenProtocol.git</PackageProjectUrl>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/kerwinxu/OpenProtocol.git</RepositoryUrl>
+    <PackageTags>orm;bytes;protocol;</PackageTags>
+    <PackAsTool>False</PackAsTool>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+
+	<Version>0.1.0</Version>
+	<Authors>kerwin</Authors>
+	<Company>kerwin</Company>
+	<Product>OpenProtocol</Product>
+	<RootNamespace>Io.Github.KerwinXu.OpenProtocol</RootNamespace>
+	<Description>My program is similar to ORM, ORM is object-oriented and relational database matching, and OpenProtocol is object-oriented matching between communicating byte streams, which is a serialization technology.</Description>
+	<PackageId>Io.Github.KerwinXu.OpenProtocol</PackageId>
+	  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\Readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

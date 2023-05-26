@@ -1,0 +1,12 @@
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\bin\Debug\net6.0\LibOpenProtocol.deps.json
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\bin\Debug\net6.0\LibOpenProtocol.dll
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\bin\Debug\net6.0\LibOpenProtocol.pdb
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net6.0\LibOpenProtocol.csproj.AssemblyReference.cache
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net6.0\LibOpenProtocol.GeneratedMSBuildEditorConfig.editorconfig
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net6.0\LibOpenProtocol.AssemblyInfoInputs.cache
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net6.0\LibOpenProtocol.AssemblyInfo.cs
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net6.0\LibOpenProtocol.csproj.CoreCompileInputs.cache
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net6.0\LibOpenProtocol.dll
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net6.0\refint\LibOpenProtocol.dll
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net6.0\LibOpenProtocol.pdb
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net6.0\ref\LibOpenProtocol.dll

@@ -1,0 +1,5 @@
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net35\LibOpenProtocol.csproj.AssemblyReference.cache
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net35\LibOpenProtocol.GeneratedMSBuildEditorConfig.editorconfig
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net35\LibOpenProtocol.AssemblyInfoInputs.cache
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net35\LibOpenProtocol.AssemblyInfo.cs
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net35\LibOpenProtocol.csproj.CoreCompileInputs.cache

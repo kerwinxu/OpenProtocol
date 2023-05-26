@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>LibOpenProtocol</id>
+    <version>1.0.0</version>
+    <title>OpenProtocol</title>
+    <authors>LibOpenProtocol</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">LICENSE.md</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <readme>Readme.md</readme>
+    <projectUrl>https://github.com/kerwinxu/OpenProtocol.git</projectUrl>
+    <description>Package Description</description>
+    <tags>orm bytes protocol</tags>
+    <repository url="https://github.com/kerwinxu/OpenProtocol.git" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.0" />
+      <group targetFramework=".NETFramework4.8" />
+      <group targetFramework="net6.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\bin\Debug\net40\LibOpenProtocol.dll" target="lib\net40\LibOpenProtocol.dll" />
+    <file src="E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\bin\Debug\net48\LibOpenProtocol.dll" target="lib\net48\LibOpenProtocol.dll" />
+    <file src="E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\bin\Debug\net6.0\LibOpenProtocol.dll" target="lib\net6.0\LibOpenProtocol.dll" />
+    <file src="E:\onedrive\project\c#\OpenProtocol\LICENSE.md" target="\LICENSE.md" />
+    <file src="E:\onedrive\project\c#\OpenProtocol\Readme.md" target="\Readme.md" />
+  </files>
+</package>

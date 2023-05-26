@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\onedrive\\project\\c#\\OpenProtocol\\LibOpenProtocol\\LibOpenProtocol.csproj": {}
+  },
+  "projects": {
+    "E:\\onedrive\\project\\c#\\OpenProtocol\\LibOpenProtocol\\LibOpenProtocol.csproj": {
+      "version": "0.1.0",
+      "restore": {
+        "projectUniqueName": "E:\\onedrive\\project\\c#\\OpenProtocol\\LibOpenProtocol\\LibOpenProtocol.csproj",
+        "projectName": "Io.Github.KerwinXu.OpenProtocol",
+        "projectPath": "E:\\onedrive\\project\\c#\\OpenProtocol\\LibOpenProtocol\\LibOpenProtocol.csproj",
+        "packagesPath": "E:\\nuget\\packages",
+        "outputPath": "E:\\onedrive\\project\\c#\\OpenProtocol\\LibOpenProtocol\\obj\\",
+        "projectStyle": "PackageReference",
+        "crossTargeting": true,
+        "configFilePaths": [
+          "C:\\Users\\kerwin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net40",
+          "net48",
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.cdn.azure.cn/v3/index.json": {},
+          "https://www.nuget.org/api/v2": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          },
+          "net40": {
+            "targetAlias": "net40",
+            "projectReferences": {}
+          },
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        },
+        "net40": {
+          "targetAlias": "net40",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        },
+        "net48": {
+          "targetAlias": "net48",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

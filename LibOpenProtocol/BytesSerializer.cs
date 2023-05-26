@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
 
 namespace Io.Github.KerwinXu.OpenProtocol
 {
@@ -32,8 +30,8 @@ namespace Io.Github.KerwinXu.OpenProtocol
             var type = typeof(T);
             // 然后查看有多少个有相关注解的
             List<MemberInfo> members = new List<MemberInfo>();
-            members.AddRange(type.GetProperties().Where(x => x.GetCustomAttributes() != null && x.GetCustomAttributes(false).Where(y => y is DataItem).Any()));
-            members.AddRange(type.GetFields().Where(x => x.GetCustomAttributes() != null && x.GetCustomAttributes(false).Where(y => y is DataItem).Any()));
+            members.AddRange(type.GetProperties().Where(x => x.GetCustomAttributes(false) != null && x.GetCustomAttributes(false).Where(y => y is DataItem).Any()));
+            members.AddRange(type.GetFields().Where(x => x.GetCustomAttributes(false) != null && x.GetCustomAttributes(false).Where(y => y is DataItem).Any()));
             // 然后排序
             members.Sort((x, y) => getIndex(x).CompareTo(getIndex(y)));
             // 这里遍历
@@ -107,7 +105,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                         if (propertyInfo.PropertyType.IsArray)
                         {
                             // 这里要判断是否有初始化
-                            var arr = propertyInfo.GetValue(result) as Array;
+                            var arr = propertyInfo.GetValue(result,null) as Array;
                             if(arr == null)
                             {
                                 // 异常，数组不知道长度
@@ -135,13 +133,13 @@ namespace Io.Github.KerwinXu.OpenProtocol
                     if (propertyInfo.PropertyType.IsArray)
                     {
                         // 数组的话，要循环
-                        var arr = propertyInfo.GetValue(result) as Array; // 转换成数组
+                        var arr = propertyInfo.GetValue(result,null) as Array; // 转换成数组
                         var persize = sizeOfByType(type_protocol);                // 每个占用的长度
                         // 这里要看看这个数组是否有空间
                         if (arr == null)
                         {
                             arr = Array.CreateInstance(type_protocol, count / persize);  // 动态创建数组
-                            propertyInfo.SetValue(result, arr);                  // 赋值
+                            propertyInfo.SetValue(result, arr,null);                  // 赋值
                         }
                         // 遍历赋值
                         for (int i = 0; i < arr.Length; i++)
@@ -161,7 +159,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                         var obj = bytesToObject(data2, type_protocol, isBigEndian, scale);
                         // 这里转换格式
                         obj = Convert.ChangeType(obj, type2);
-                        propertyInfo.SetValue(result, obj);
+                        propertyInfo.SetValue(result, obj,null);
 
                     }
                     // 下一个。
@@ -230,15 +228,14 @@ namespace Io.Github.KerwinXu.OpenProtocol
             // 然后根据类型返回相关的值
             if (type == typeof(byte)) return  data[0] / scale;
             if (type == typeof(sbyte)) return data[0] / scale;
-            if (type == typeof(ushort)) return BitConverter.ToUInt16(data) / scale;
-            if (type == typeof(short)) return BitConverter.ToInt16(data) / scale;
-            if (type == typeof(uint)) return BitConverter.ToUInt32(data) / scale;
-            if (type == typeof(int)) return BitConverter.ToInt32(data) / scale;
-            if (type == typeof(ulong)) return BitConverter.ToUInt64(data) / scale;
-            if (type == typeof(long)) return BitConverter.ToInt64(data) / scale;
-            if (type == typeof(float)) return BitConverter.ToSingle(data) / scale;
+            if (type == typeof(ushort)) return BitConverter.ToUInt16(data,0) / scale;
+            if (type == typeof(short)) return BitConverter.ToInt16(data,0) / scale;
+            if (type == typeof(uint)) return BitConverter.ToUInt32(data,0) / scale;
+            if (type == typeof(int)) return BitConverter.ToInt32(data,0) / scale;
+            if (type == typeof(ulong)) return BitConverter.ToUInt64(data, 0) / scale;
+            if (type == typeof(long)) return BitConverter.ToInt64(data, 0) / scale;
+            if (type == typeof(float)) return BitConverter.ToSingle(data, 0) / scale;
             
-
             return null;
         }
 
@@ -276,7 +273,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                     {
                         throw new NoAttributeExistsException(item2.OtherName);
                     }
-                    var other_value = propertyInfo2 != null ? propertyInfo2.GetValue(t) : int.MinValue;                 // 通常情况下，这个在前面已经赋值了
+                    var other_value = propertyInfo2 != null ? propertyInfo2.GetValue(t, null) : int.MinValue;                 // 通常情况下，这个在前面已经赋值了
                     if (string.IsNullOrEmpty(item2.OtherName) || other_value.ToString() == item2.OtherValue.ToString()) // 如果没有名称或者这里相等，因为牵涉到对象比较，这里直接比较字符串吧。
                     {
                         if (item2 is StaticSizeByOther) // 如果是固定的
@@ -288,7 +285,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                         {
                             // 这里要取得另一个属性的值
                             var propertyInfo3 = type.GetProperties().Where(x => x.Name == ((VarSizeByOther)item2).OtherSize).FirstOrDefault();
-                            count =int.Parse(propertyInfo3.GetValue(t).ToString()); // 这里以后得做一个判断，是否是数字。                                 
+                            count =int.Parse(propertyInfo3.GetValue(t,null).ToString()); // 这里以后得做一个判断，是否是数字。                                 
                             if (!((VarSizeByOther)item2).IsByteCount) count *= sizeOfByType(elementType); // 这里要判断一下是否是按照字节计数的。
                         }
                     }
@@ -408,8 +405,8 @@ namespace Io.Github.KerwinXu.OpenProtocol
             var type = typeof(T);
             // 然后查看有多少个有相关注解的
             List<MemberInfo> members = new List<MemberInfo>();
-            members.AddRange(type.GetProperties().Where(x => x.GetCustomAttributes() != null && x.GetCustomAttributes(false).Where(y => y is DataItem).Any()));
-            members.AddRange(type.GetFields().Where(x => x.GetCustomAttributes() != null && x.GetCustomAttributes(false).Where(y => y is DataItem).Any()));
+            members.AddRange(type.GetProperties().Where(x => x.GetCustomAttributes(false) != null && x.GetCustomAttributes(false).Where(y => y is DataItem).Any()));
+            members.AddRange(type.GetFields().Where(x => x.GetCustomAttributes(false) != null && x.GetCustomAttributes(false).Where(y => y is DataItem).Any()));
             // 然后排序
             members.Sort((x, y) => getIndex(x).CompareTo(getIndex(y)));
             int i_start = 0; // 当前位置
@@ -454,7 +451,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                     PropertyInfo propertyInfo = item as PropertyInfo;
                     bool isBigEndian = false;                                     // 字节序大小端
                     double scale = 0;
-                    Type type1 = getPropertyType(propertyInfo, ref isBigEndian, ref scale);  // 类型
+                    Type type_ptotocol = getPropertyType(propertyInfo, ref isBigEndian, ref scale);  // 注解中协议的类型
                     // 2. 
                     // 这里判断是否是校验
                     var check = propertyInfo.GetCustomAttributes(false).Where(x => x is Check).FirstOrDefault();
@@ -478,24 +475,25 @@ namespace Io.Github.KerwinXu.OpenProtocol
                     }
                     else
                     {
-                        var data6 = propertyInfo.GetValue(t); // 取得这个值
+                        var data6 = propertyInfo.GetValue(t,null); // 取得这个值
                         // 查看是否是数组
                         if (propertyInfo.PropertyType.IsArray) // 数组的话，每一个都添加。
                         {
                             var data8 = data6 as Array;
                             for (int i = 0; i < data8.Length; i++)
                             {
-                                var data9 = objectToBytes(data8.GetValue(i));  // 转成字节数组
+
+                                var data9 = objectToBytes(object_scale(data8.GetValue(i), type_ptotocol, scale));  // 转成字节数组
                                 if (BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data9); // 字节序
                                 result.AddRange(data9);
                             }
-                            counts.Add(sizeOfByType(type1) * data8.Length);
+                            counts.Add(sizeOfByType(type_ptotocol) * data8.Length);
                             i_start += counts.Last();
                         }
                         else
                         {
-                            counts.Add(sizeOfByType(type1));   // 只有一个
-                            var data7 = objectToBytes(data6);  // 转成字节数组
+                            counts.Add(sizeOfByType(type_ptotocol));   // 只有一个
+                            var data7 = objectToBytes(object_scale(data6, type_ptotocol, scale));  // 转成字节数组
                             if (BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data7); // 字节序
                             result.AddRange(data7);
                             i_start += data7.Length;
@@ -509,6 +507,29 @@ namespace Io.Github.KerwinXu.OpenProtocol
             //throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 将obj的值乘以scale，然后转换成type类型后返回
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="type"></param>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        private object object_scale(object obj , Type type, double scale)
+        {
+            object obj2=null;
+            if (obj.GetType() == typeof(byte)) obj2 = (byte)obj * scale;
+            if (obj.GetType() == typeof(sbyte)) obj2 = (sbyte)obj * scale;
+            if (obj.GetType() == typeof(ushort)) obj2 = (ushort)obj * scale;
+            if (obj.GetType() == typeof(short)) obj2 = (short)obj * scale;
+            if (obj.GetType() == typeof(uint)) obj2 = (uint)obj * scale;
+            if (obj.GetType() == typeof(int)) obj2 = (int)obj * scale;
+            if (obj.GetType() == typeof(ulong)) obj2 = (ulong)obj * scale;
+            if (obj.GetType() == typeof(long)) obj2 = (long)obj * scale;
+            if (obj.GetType() == typeof(float)) obj2 = (float)obj * scale;
+            if (obj.GetType() == typeof(double)) obj2 = (double)obj * scale;
+
+            return Convert.ChangeType(obj2,type);
+        }
         
 
     }

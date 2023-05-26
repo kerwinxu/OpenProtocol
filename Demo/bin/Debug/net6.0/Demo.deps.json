@@ -7,8 +7,25 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Demo/1.0.0": {
+        "dependencies": {
+          "Io.Github.KerwinXu.OpenProtocol": "0.1.0",
+          "LibOpenProtocol": "0.1.0.0"
+        },
         "runtime": {
           "Demo.dll": {}
+        }
+      },
+      "Io.Github.KerwinXu.OpenProtocol/0.1.0": {
+        "runtime": {
+          "LibOpenProtocol.dll": {}
+        }
+      },
+      "LibOpenProtocol/0.1.0.0": {
+        "runtime": {
+          "LibOpenProtocol.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          }
         }
       }
     }
@@ -16,6 +33,16 @@
   "libraries": {
     "Demo/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Io.Github.KerwinXu.OpenProtocol/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LibOpenProtocol/0.1.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

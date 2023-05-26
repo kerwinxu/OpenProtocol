@@ -1,0 +1,9 @@
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\bin\Debug\net48\LibOpenProtocol.dll
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\bin\Debug\net48\LibOpenProtocol.pdb
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net48\LibOpenProtocol.csproj.AssemblyReference.cache
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net48\LibOpenProtocol.GeneratedMSBuildEditorConfig.editorconfig
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net48\LibOpenProtocol.AssemblyInfoInputs.cache
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net48\LibOpenProtocol.AssemblyInfo.cs
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net48\LibOpenProtocol.csproj.CoreCompileInputs.cache
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net48\LibOpenProtocol.dll
+E:\onedrive\project\c#\OpenProtocol\LibOpenProtocol\obj\Debug\net48\LibOpenProtocol.pdb
