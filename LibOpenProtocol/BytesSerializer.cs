@@ -184,7 +184,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                         var data4 = ((Check)check).Compute(data3); // 
                         // 然后比较，请注意，这里比较的是字节数组，data4先转成字节数组。
                         var data5 = objectToBytes(data4);
-                        if (BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data5);
+                        if (!BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data5);
                         // 然后判断
                         if(!Enumerable.SequenceEqual(data5, data2))
                         {
@@ -224,7 +224,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
 
         public object bytesToObject(byte[]data, Type type, bool isBigEndian, double scale)
         {
-            if (isBigEndian ^ BitConverter.IsLittleEndian) { Array.Reverse(data); } // 如果是大端，就反转
+            if (!isBigEndian ^ BitConverter.IsLittleEndian) { Array.Reverse(data); } // 如果是大端，就反转
             // 然后根据类型返回相关的值
             if (type == typeof(byte)) return  data[0] / scale;
             if (type == typeof(sbyte)) return data[0] / scale;
@@ -467,7 +467,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                         var data4 = ((Check)check).Compute(data3); // 
                         // 然后比较，请注意，这里比较的是字节数组，data4先转成字节数组。
                         var data5 = objectToBytes(data4);
-                        if (BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data5);
+                        if (!BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data5);
                         // 
                         counts.Add(data5.Length);
                         result.AddRange(data5);
@@ -484,7 +484,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                             {
 
                                 var data9 = objectToBytes(object_scale(data8.GetValue(i), type_ptotocol, scale));  // 转成字节数组
-                                if (BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data9); // 字节序
+                                if (!BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data9); // 字节序
                                 result.AddRange(data9);
                             }
                             counts.Add(sizeOfByType(type_ptotocol) * data8.Length);
@@ -494,7 +494,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
                         {
                             counts.Add(sizeOfByType(type_ptotocol));   // 只有一个
                             var data7 = objectToBytes(object_scale(data6, type_ptotocol, scale));  // 转成字节数组
-                            if (BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data7); // 字节序
+                            if (!BitConverter.IsLittleEndian ^ isBigEndian) Array.Reverse(data7); // 字节序
                             result.AddRange(data7);
                             i_start += data7.Length;
                         }

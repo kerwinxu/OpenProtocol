@@ -3,6 +3,8 @@ using Io.Github.KerwinXu.OpenProtocol.Attributes;
 using Io.Github.KerwinXu.OpenProtocol.Attributes.Checks;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Data;
 using System.Linq;
 using System.Runtime.Intrinsics.Arm;
 
@@ -49,6 +51,29 @@ namespace TestProject1
             Assert.AreEqual(25.8f, testClass.data, 0.01);
             byte[] datas2 = (new BytesSerializer<TestScale1>()).Serialize(testClass);
             Assert.IsTrue(Enumerable.SequenceEqual(datas, datas2));
+
+        }
+
+
+        class ClsFloat1
+        {
+            [DataItem(0)]
+            public float Data { get; set; }
+        }
+
+        [TestMethod]
+        public void TestFloat()
+        {
+            ClsFloat1 clsFloat1 = new ClsFloat1();
+            clsFloat1.Data = -1.1f;
+            var tmp1 = BitConverter.GetBytes(clsFloat1.Data);
+            byte[] datas = (new BytesSerializer<ClsFloat1>()).Serialize(clsFloat1);
+            //
+            Assert.IsTrue(Enumerable.SequenceEqual(tmp1, datas));
+
+            var clsFloat2 = (new BytesSerializer<ClsFloat1>()).Deserialize(datas);
+            Assert.AreEqual(clsFloat1.Data, clsFloat2.Data);
+
 
         }
     }
