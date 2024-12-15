@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "Io.Github.KerwinXu.OpenProtocol/0.1.0": {
+      "Io.Github.KerwinXu.OpenProtocol/0.1.1": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
@@ -15,7 +15,7 @@
     }
   },
   "libraries": {
-    "Io.Github.KerwinXu.OpenProtocol/0.1.0": {
+    "Io.Github.KerwinXu.OpenProtocol/0.1.1": {
       "type": "project",
       "path": "../LibOpenProtocol/LibOpenProtocol.csproj",
       "msbuildProject": "../LibOpenProtocol/LibOpenProtocol.csproj"
@@ -23,7 +23,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Io.Github.KerwinXu.OpenProtocol >= 0.1.0"
+      "Io.Github.KerwinXu.OpenProtocol >= 0.1.1"
     ]
   },
   "packageFolders": {

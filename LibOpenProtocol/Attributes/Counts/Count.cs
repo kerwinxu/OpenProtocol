@@ -1,15 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Sizes
+namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Counts
 {
-
-    public  class Count:Attribute
+    /// <summary>
+    /// 数组的元素个数。
+    /// </summary>
+    public abstract  class Count:Attribute
     {
         public int Value { get; set; }
 
-        public bool IsByteCount { get; set; }
+        /// <summary>
+        /// 是否是字节计数
+        /// </summary>
+        public bool IsBytesCount { get; set; }
 
     }
 }

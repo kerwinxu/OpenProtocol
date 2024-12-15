@@ -11,7 +11,7 @@ namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Checks
     public class CheckSum : Check
     {
 
-        public override object Compute(byte[] data)
+        public override byte[] Compute(byte[] data)
         {
             byte[] result = new byte[1]; //只有一个
             var sum = data.Select(x => (int)x).Sum();  // 计算和

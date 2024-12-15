@@ -15,7 +15,7 @@
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 
-	<Version>0.1.0</Version>
+	<Version>0.1.1</Version>
 	<Authors>kerwin</Authors>
 	<Company>kerwin</Company>
 	<Product>OpenProtocol</Product>

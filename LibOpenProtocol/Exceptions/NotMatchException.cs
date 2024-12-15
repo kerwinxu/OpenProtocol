@@ -8,7 +8,7 @@ namespace Io.Github.KerwinXu.OpenProtocol.Exceptions
     {
         public string MemberName { get; set; }
 
-        public NotMatchException(string  memberName)
+        public NotMatchException(string  memberName):base($"不匹配：{memberName}")
         {
             this.MemberName = memberName;
         }

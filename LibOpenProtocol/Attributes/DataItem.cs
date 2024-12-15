@@ -16,17 +16,16 @@ namespace Io.Github.KerwinXu.OpenProtocol.Attributes
 
 
         /// <summary>
-        /// 字节序是否是大端
+        /// 字节序，可以是null，如果是null，表示不做处理
         /// </summary>
-        public bool BigEndian { get; set; }
+        public string? Endianness { get; set; }
 
-        
 
-        public DataItem(int index) { Index = index; }
-
-        public DataItem(int index, bool bigEndian) : this(index)
+        public DataItem(int index, string? endianness = null)
         {
-            BigEndian = bigEndian;
+            Index = index; Endianness = endianness;
         }
+
+
     }
 }

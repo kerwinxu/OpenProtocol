@@ -21,7 +21,7 @@ namespace Io.Github.KerwinXu.OpenProtocol.Attributes
         public int EndIndex { get; set; }
 
 
-        public abstract object Compute(byte[] data);
+        public abstract byte[] Compute(byte[] data);
 
     }
 }

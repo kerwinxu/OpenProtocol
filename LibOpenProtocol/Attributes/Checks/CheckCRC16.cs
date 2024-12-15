@@ -19,77 +19,45 @@ namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Checks
         public ushort INITValue { get; set; }
 
         /// <summary>
-        /// 异或值
+        /// 字节序，可以是null，如果是null或者空，表示不做处理
         /// </summary>
-        public ushort XOROUT { get; set; }
+        public string? Endianness { get; set; }
 
-        /// <summary>
-        /// 输入反转
-        /// </summary>
-        public bool InputReverse { get; set; }
-
-        /// <summary>
-        /// 输出反转
-        /// </summary>
-        public bool OutputReverse { get; set; }
-       
-        public CheckCRC16(int start, int end, ushort poly, ushort initvalue, ushort xorout, bool inputReverse=true, bool outputReverse=true)
+        public CheckCRC16(int start, int end, ushort poly, ushort initvalue,string endianness="")
         {
             this.StartIndex = start;
             this.EndIndex = end;
             this.POLY = poly;
             this.INITValue = initvalue;
-            this.XOROUT = xorout;
-            this.InputReverse = inputReverse;
-            this.OutputReverse = outputReverse;
+            this.Endianness = endianness;
         }
 
 
-        public ushort reverse16(ushort data)
-        {
-            ushort result = 0;
-            for (int i = 0; i < 16; i++)
-            {
-                result |= (ushort)(((data >> i) & 0x01) << (15 - i));
-            }
-            return result;
-        }
+     
 
-        public byte reverse8(byte data)
-        {
-            byte result = 0;
-            for (int i = 0; i < 8; i++)
-            {
-                result |= (byte)(((data >> i) & 0x01) << (7 - i));
-            }
-            return result;
-        }
-
-
-        public override object Compute(byte[] datas)
+        public override byte[] Compute(byte[] datas)
         {
             ushort crc = INITValue;
             for (int i = 0; i < datas.Length; i++)
             {
-                var data = datas[i];
-                if(InputReverse) data = reverse8(data);
-                crc = (ushort)(crc ^ (data << 8));
-                for (int j = 0; j < 8; j++)
+                crc ^= datas[StartIndex + i];   // 取出一个8字节跟crc做异或，结果放在crc中
+                for (int j = 0; j < 8; j++)     // 8位，循环8次
                 {
-                    if((crc & 0x8000) == 0x8000)
+                    if((crc &0x0001)!=0)
                     {
-
-                        crc =(ushort) ((crc << 1) ^ POLY);
+                        crc >>= 1;
+                        crc ^= POLY;
                     }
                     else
                     {
-                        crc <<= 1;
+                        crc >>= 1;
                     }
-                }
+
+                } 
             }
-            if(OutputReverse)crc = reverse16(crc);
-            crc = (ushort)(crc ^ XOROUT);
-            return crc;
+            // 
+            var tmp = BitConverter.GetBytes(crc);           // 转成字节
+            return Utils.AdjustEndianness.MachineToProtocol(tmp, Endianness); // 调整字节序
 
         }
 

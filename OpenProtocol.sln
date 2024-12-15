@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibOpenProtocol", "LibOpenProtocol\LibOpenProtocol.csproj", "{180DAB90-9DF4-4545-B020-586FA99F0E60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibOpenProtocol", "LibOpenProtocol\LibOpenProtocol.csproj", "{180DAB90-9DF4-4545-B020-586FA99F0E60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

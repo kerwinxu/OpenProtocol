@@ -1,18 +1,13 @@
-﻿using Io.Github.KerwinXu.OpenProtocol.Attributes.Sizes;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Size
+﻿namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Counts
 {
     /// <summary>
     /// 默认长度
     /// </summary>
     public class DefaultSize : Count
     {
-        public DefaultSize(int size, bool isByteCount=false) {
+        public DefaultSize(int size, bool isBytesCount = false) {
             this.Value = size;
-            this.IsByteCount = isByteCount;
+            this.IsBytesCount = isBytesCount;
         }
     }
 }

@@ -8,15 +8,17 @@ namespace Io.Github.KerwinXu.OpenProtocol
     /// 协议的基类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public  interface IProtocol<T> where T : class,  new ()
+    public  interface IProtocol
     {
 
         /// <summary>
         /// 反序列化
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">字节数组或者队列</param>
+        /// <param name="start_index">起始下标</param>
+        /// <param name="end_index">结束下标</param>
         /// <returns></returns>
-        T Deserialize(byte[] data);
+        T Deserialize<T>(IList<byte> data, int start_index, ref int end_index) where T : new();
 
         /// <summary>
         /// 序列化
@@ -24,6 +26,6 @@ namespace Io.Github.KerwinXu.OpenProtocol
         /// <param name=""></param>
         /// <param name=""></param>
         /// <returns></returns>
-          byte[] Serialize(T t);
+        byte[] Serialize<T>(T t) where T : new();
     }
 }

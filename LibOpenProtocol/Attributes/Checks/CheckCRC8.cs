@@ -65,7 +65,7 @@ namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Checks
         }
 
 
-        public override object Compute(byte[] datas)
+        public override byte[] Compute(byte[] datas)
         {
             byte crc = INITValue;
             for (int i = 0; i < datas.Length; i++)
@@ -88,7 +88,7 @@ namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Checks
             }
             if (OutputReverse) crc = reverse8(crc);
             crc = (byte)(crc ^ XOROUT);
-            return crc;
+            return BitConverter.GetBytes(crc);
 
         }
     }
