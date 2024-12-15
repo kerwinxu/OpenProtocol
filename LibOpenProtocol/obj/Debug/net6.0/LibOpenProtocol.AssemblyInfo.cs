@@ -16,11 +16,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute("My program is similar to ORM, ORM is object-oriented and relational database matc" +
     "hing, and OpenProtocol is object-oriented matching between communicating byte st" +
     "reams, which is a serialization technology.")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("0.1.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.1")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("0.2.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.2")]
 [assembly: System.Reflection.AssemblyProductAttribute("OpenProtocol")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LibOpenProtocol")]
-[assembly: System.Reflection.AssemblyVersionAttribute("0.1.1.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("0.2.0.0")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/kerwinxu/OpenProtocol.git")]
 
 // 由 MSBuild WriteCodeFragment 类生成。

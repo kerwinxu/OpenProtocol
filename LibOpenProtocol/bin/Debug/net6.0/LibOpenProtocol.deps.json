@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "LibOpenProtocol/0.1.1": {
+      "LibOpenProtocol/0.2": {
         "runtime": {
           "LibOpenProtocol.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "LibOpenProtocol/0.1.1": {
+    "LibOpenProtocol/0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

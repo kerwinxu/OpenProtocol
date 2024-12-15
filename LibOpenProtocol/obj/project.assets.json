@@ -15,7 +15,7 @@
     "E:\\nuget\\packages": {}
   },
   "project": {
-    "version": "0.1.1",
+    "version": "0.2.0",
     "restore": {
       "projectUniqueName": "E:\\onedrive\\project\\c#\\OpenProtocol\\LibOpenProtocol\\LibOpenProtocol.csproj",
       "projectName": "Io.Github.KerwinXu.OpenProtocol",
