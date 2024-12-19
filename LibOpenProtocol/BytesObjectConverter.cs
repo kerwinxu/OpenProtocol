@@ -19,66 +19,66 @@ namespace Io.Github.KerwinXu.OpenProtocol
         #region 公共的函数
 
 
-        private static Dictionary<string, int> SIZEOFS = new Dictionary<string, int>() {
-            // 单个元素的
-            { typeof(sbyte).Name, 1 },
-            { typeof(byte).Name, 1 },
-            //
-            { typeof(short).Name,2 },
-            { typeof(ushort).Name,2 },
-            //
-            { typeof(int).Name, 4 },
-            { typeof(uint).Name, 4 },
-            //
-            { typeof(long).Name, 8 },
-            { typeof(ulong).Name, 8 },
-            //
-            { typeof(float).Name, 4 },
-            { typeof(double).Name, 8 },
-            //
-           //{ typeof(decimal).Name, 16 },
-            //
-            { typeof(char).Name,2 },
-            //
-            { typeof(bool).Name,1 },
-            // 数组的形式
-            { typeof(sbyte[]).Name, 1 },
-            { typeof(byte[]).Name, 1 },
-            //
-            { typeof(short[]).Name,2 },
-            { typeof(ushort[]).Name,2 },
-            //
-            { typeof(int[]).Name, 4 },
-            { typeof(uint[]).Name, 4 },
-            //
-            { typeof(long[]).Name, 8 },
-            { typeof(ulong[]).Name, 8 },
-            //
-            { typeof(float[]).Name, 4 },
-            { typeof(double[]).Name, 8 },
-            //
-           //{ typeof(decimal[]).Name, 16 },
-            //
-            { typeof(char[]).Name,2 },
-            //
-            { typeof(bool[]).Name,1 },
-        };
+        //private static Dictionary<string, int> SIZEOFS = new Dictionary<string, int>() {
+        //    // 单个元素的
+        //    { typeof(sbyte).Name, 1 },
+        //    { typeof(byte).Name, 1 },
+        //    //
+        //    { typeof(short).Name,2 },
+        //    { typeof(ushort).Name,2 },
+        //    //
+        //    { typeof(int).Name, 4 },
+        //    { typeof(uint).Name, 4 },
+        //    //
+        //    { typeof(long).Name, 8 },
+        //    { typeof(ulong).Name, 8 },
+        //    //
+        //    { typeof(float).Name, 4 },
+        //    { typeof(double).Name, 8 },
+        //    //
+        //   //{ typeof(decimal).Name, 16 },
+        //    //
+        //    { typeof(char).Name,2 },
+        //    //
+        //    { typeof(bool).Name,1 },
+        //    // 数组的形式
+        //    { typeof(sbyte[]).Name, 1 },
+        //    { typeof(byte[]).Name, 1 },
+        //    //
+        //    { typeof(short[]).Name,2 },
+        //    { typeof(ushort[]).Name,2 },
+        //    //
+        //    { typeof(int[]).Name, 4 },
+        //    { typeof(uint[]).Name, 4 },
+        //    //
+        //    { typeof(long[]).Name, 8 },
+        //    { typeof(ulong[]).Name, 8 },
+        //    //
+        //    { typeof(float[]).Name, 4 },
+        //    { typeof(double[]).Name, 8 },
+        //    //
+        //   //{ typeof(decimal[]).Name, 16 },
+        //    //
+        //    { typeof(char[]).Name,2 },
+        //    //
+        //    { typeof(bool[]).Name,1 },
+        //};
 
 
-        /// <summary>
-        ///  取得字节数
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static int SizeOfByType(Type type)
-        {
-            if (type == null) return 0;
-            if (SIZEOFS.ContainsKey(type.Name))
-            {
-                return SIZEOFS[type.Name];
-            }
-            throw new UnsupportedTypeException(type);
-        }
+        ///// <summary>
+        /////  取得字节数
+        ///// </summary>
+        ///// <param name="type"></param>
+        ///// <returns></returns>
+        //public static int SizeOfByType(Type type)
+        //{
+        //    if (type == null) return 0;
+        //    if (SIZEOFS.ContainsKey(type.Name))
+        //    {
+        //        return SIZEOFS[type.Name];
+        //    }
+        //    throw new UnsupportedTypeException(type);
+        //}
 
         /// <summary>
         /// 取得有DataItemde的成员
@@ -152,17 +152,17 @@ namespace Io.Github.KerwinXu.OpenProtocol
         }
 
 
-        private Type getMemberType(MemberInfo memberInfo)
-        {
-            if(memberInfo is FieldInfo)
-            {
-               return  ((FieldInfo)memberInfo).FieldType;
-            }
-            else 
-            {
-                return ((PropertyInfo)memberInfo).PropertyType;
-            }
-        }
+        //private Type getMemberType(MemberInfo memberInfo)
+        //{
+        //    if(memberInfo is FieldInfo)
+        //    {
+        //       return  ((FieldInfo)memberInfo).FieldType;
+        //    }
+        //    else 
+        //    {
+        //        return ((PropertyInfo)memberInfo).PropertyType;
+        //    }
+        //}
 
         /// <summary>
         /// 取得一个数组元素的大小
@@ -171,10 +171,10 @@ namespace Io.Github.KerwinXu.OpenProtocol
         /// <returns></returns>
         private int getArrayMemberElementSize(MemberInfo member)
         {
-            var type = getMemberType(member);
+            var type = Member.GetMemberType(member);
             if (type.IsArray)
             {
-                return SizeOfByType(type.GetElementType());
+                return TypeSize.SizeOfByType(type.GetElementType());
             }
             // 
             return 1;
@@ -188,56 +188,70 @@ namespace Io.Github.KerwinXu.OpenProtocol
         /// <returns></returns>
         private int getMemberCount(object obj, MemberInfo memberInfo)
         {
-            var _base_on_size = memberInfo.GetCustomAttributes(false).Where(x => x is BaseOnOtherSize).ToArray();// 可能存在多个条件的情况
-            var _other_size = (OtherSize)memberInfo.GetCustomAttributes(false).Where(x => x is OtherSize).FirstOrDefault();
-            var _count_element = getArrayMemberElementSize(memberInfo); // 计算单个元素的所占的字节数量
-            var _default_size = memberInfo.GetCustomAttributes(false).Where(x => x is DefaultSize).FirstOrDefault();
-            var count = 0;
-            if(_other_size != null)            // 如果由其他项目指定个数
+            // 这里先看看是否有count接口
+            var _counts = memberInfo.GetCustomAttributes(false).Where(x => x is ICount).ToArray();// 
+            foreach (ICount item in _counts)
             {
-                var _other_value = get_value_by_member_name(obj, _other_size.OtherName); // 取得某个成员的值
-                count =  Convert.ToInt32( _other_value);
-                // 要判断是否字节计数
-                if (_other_size.IsBytesCount) { count = count / _count_element; }
-                return count;
-                
-            }
-            else if (_base_on_size.Length > 0) // 如果存在依照别的字段的值
-            {
-                foreach (BaseOnOtherSize item1 in _base_on_size)
+                if (item.IsAvailable(obj))
                 {
-                    var _other_value = get_value_by_member_name(obj, item1.OtherName); // 取得某个成员的值
-                    if (_other_value != null && _other_value.Equals(item1.OtherValue))    // 判断是否相等
-                    {
-                        // 这里表示相等，有两种情况
-                        if (item1 is StaticSizeByOther) // 如果是固定的
-                        {
-                            count = item1.Value;
-
-                        }
-                        else if (item1 is VarSizeByOther)
-                        {
-                            // 如果是可变的，那么还得找另一个成员
-                            var _other_size_value = get_value_by_member_name(obj, ((VarSizeByOther)item1).OtherSize);
-                            // TODO 要加入异常，没有某个成员
-                            count = (int)_other_size_value;
-
-                        }
-                        // 这里要判断是否是字节计数
-                        if (item1.IsBytesCount) count /= _count_element; // 不是字节计数需要相乘。
-                        return count; // 这里得到字节数了。
-                    }
-
+                    return item.getCount(obj, memberInfo);
                 }
+
             }
-            // 这里判断是否是常量
-            if (_default_size != null)
-            {
-                var item2 = _default_size as DefaultSize;
-                count = item2.Value;
-                if (item2.IsBytesCount) count /= _count_element;
-                return count; // 常量的字节
-            }
+
+            #region TODO 以后删除
+            //var _base_on_size = memberInfo.GetCustomAttributes(false).Where(x => x is BaseOnOtherSize).ToArray();// 可能存在多个条件的情况
+            //var _other_size = (OtherSize)memberInfo.GetCustomAttributes(false).Where(x => x is OtherSize).FirstOrDefault();
+            //var _count_element = getArrayMemberElementSize(memberInfo); // 计算单个元素的所占的字节数量
+            //var _default_size = memberInfo.GetCustomAttributes(false).Where(x => x is DefaultSize).FirstOrDefault();
+            //var count = 0;
+            //if(_other_size != null)            // 如果由其他项目指定个数
+            //{
+            //    var _other_value = get_value_by_member_name(obj, _other_size.OtherName); // 取得某个成员的值
+            //    count =  Convert.ToInt32( _other_value);
+            //    // 要判断是否字节计数
+            //    if (_other_size.IsBytesCount) { count = count / _count_element; }
+            //    return count;
+
+            //}
+            //else if (_base_on_size.Length > 0) // 如果存在依照别的字段的值
+            //{
+            //    foreach (BaseOnOtherSize item1 in _base_on_size)
+            //    {
+            //        var _other_value = get_value_by_member_name(obj, item1.OtherName); // 取得某个成员的值
+            //        if (_other_value != null && _other_value.Equals(item1.OtherValue))    // 判断是否相等
+            //        {
+            //            // 这里表示相等，有两种情况
+            //            if (item1 is StaticSizeByOther) // 如果是固定的
+            //            {
+            //                count = item1.Value;
+
+            //            }
+            //            else if (item1 is VarSizeByOther)
+            //            {
+            //                // 如果是可变的，那么还得找另一个成员
+            //                var _other_size_value = get_value_by_member_name(obj, ((VarSizeByOther)item1).OtherSize);
+            //                // TODO 要加入异常，没有某个成员
+            //                count = (int)_other_size_value;
+
+            //            }
+            //            // 这里要判断是否是字节计数
+            //            if (item1.IsBytesCount) count /= _count_element; // 不是字节计数需要相乘。
+            //            return count; // 这里得到字节数了。
+            //        }
+
+            //    }
+            //}
+            //// 这里判断是否是常量
+            //if (_default_size != null)
+            //{
+            //    var item2 = _default_size as DefaultSize;
+            //    count = item2.Value;
+            //    if (item2.IsBytesCount) count /= _count_element;
+            //    return count; // 常量的字节
+            //}
+
+            #endregion
 
             // 最后按照成员自己的给出
             // 如果到这里还没找到，那么表示这里是要给字段了。
@@ -259,20 +273,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
         /// <returns></returns>
         private object? get_value_by_member_name(object obj, string member_name)
         {
-            var _memberinfo = obj.GetType().GetMember(member_name).FirstOrDefault();// 或许不止一个，这里暴力当作取得第一个吧。
-            if (_memberinfo == null) return null; // 没有发现成员
-            if (_memberinfo is FieldInfo) // 如果是字段
-            {
-                return ((FieldInfo)_memberinfo).GetValue(obj);
-
-            }
-            else if (_memberinfo is PropertyInfo)
-            {
-                return ((PropertyInfo)_memberinfo).GetValue(obj, null);
-            }
-
-            // 这里发出异常，不识别。
-            throw new UnknownMember(member_name);
+            return Member.getValue(obj, member_name);
             // 
             // return null;
 
@@ -420,7 +421,7 @@ namespace Io.Github.KerwinXu.OpenProtocol
         public object BytesToBulitinType(IList<byte> data, int start_index, ref int end_index, Type type, string? endianness = null) {
 
             // 占用的长度
-            var count = SizeOfByType(type);
+            var count = TypeSize.SizeOfByType(type);
             end_index = start_index +  count;
             if (end_index > data.Count) throw new IncompleteException(); // 字节不够的异常
 

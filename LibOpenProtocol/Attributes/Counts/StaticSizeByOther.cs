@@ -1,4 +1,6 @@
-﻿namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Counts
+﻿using System.Reflection;
+
+namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Counts
 {
     /// <summary>
     /// 在某个变量为某个值的情况下，固定多少个
@@ -11,7 +13,6 @@
             this.Value = size;
             this.IsBytesCount = isBytesCount;
         }
-
 
     }
 }

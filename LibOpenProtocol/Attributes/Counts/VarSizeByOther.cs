@@ -1,4 +1,7 @@
-﻿namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Counts
+﻿using Io.Github.KerwinXu.OpenProtocol.Utils;
+using System.Reflection;
+
+namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Counts
 {
     /// <summary>
     /// 在某个变量为某个值的情况下，某个变量的值是个数
@@ -15,5 +18,24 @@
             this.OtherSize = other_size;
             this.IsBytesCount = isBytesCount;
         }
+
+        public override int getCount(object obj, MemberInfo memberInfo)
+        {
+            // 取得其他变量的值
+            var _other_size_value =(int) Member.getValue(obj, OtherSize);
+            // 还要判断是否是字节的
+            if (IsBytesCount)
+            {
+                var _type = Member.GetMemberType(memberInfo);
+                var _count = TypeSize.SizeOfByType(_type);
+                return _other_size_value / _count;
+            }
+            else
+            {
+                return _other_size_value;
+            }
+            return base.getCount(obj, memberInfo);
+        }
+
     }
 }
