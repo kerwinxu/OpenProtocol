@@ -1,4 +1,5 @@
 ﻿using Io.Github.KerwinXu.OpenProtocol.Utils;
+using System;
 using System.Reflection;
 
 namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Counts
@@ -18,7 +19,7 @@ namespace Io.Github.KerwinXu.OpenProtocol.Attributes.Counts
 
         public override int getCount(object obj, MemberInfo memberInfo)
         {
-            var _other_size_value = (int)Member.getValue(obj, OtherName);
+            var _other_size_value = Convert.ToInt32(Member.getValue(obj, OtherName).ToString());
             // 还要判断是否是字节的
             if (IsBytesCount)
             {

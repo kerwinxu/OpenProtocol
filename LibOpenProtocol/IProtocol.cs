@@ -20,6 +20,17 @@ namespace Io.Github.KerwinXu.OpenProtocol
         /// <returns></returns>
         T Deserialize<T>(IList<byte> data, int start_index, ref int end_index) where T : new();
 
+
+        /// <summary>
+        /// 反序列化,是返回列表的。不止一个的
+        /// </summary>
+        /// <param name="data">字节数组或者队列</param>
+        /// <param name="start_index">起始下标</param>
+        /// <param name="end_index">结束下标</param>
+        /// <returns></returns>
+        IList<T> Deserializes<T>(IList<byte> data, int start_index, ref int end_index) where T : new();
+
+
         /// <summary>
         /// 序列化
         /// </summary>

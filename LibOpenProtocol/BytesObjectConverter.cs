@@ -379,10 +379,10 @@ namespace Io.Github.KerwinXu.OpenProtocol
                     var check_start = positions.Where(x => x.MemberIndex == ((Check)_check).StartIndex).FirstOrDefault();
                     var check_end = positions.Where(x => x.MemberIndex == ((Check)_check).EndIndex).FirstOrDefault();
                     // 
-                    if (check_start == null) throw new CheckException(); // TODO 详细的错误
-                    if (check_end == null) throw new CheckException(); // TODO 详细的错误
+                    if (check_start == null) throw new CheckException(); // 详细的错误
+                    if (check_end == null) throw new CheckException(); // 详细的错误
                                                                         // 取得字节数组，这个要做校验。
-                    var data3 = data.Skip(check_start.MemberIndex).Take(check_end.BytesIndex + check_end.BytesCount - check_start.MemberIndex).ToArray();
+                    var data3 = data.Skip(check_start.BytesIndex).Take(check_end.BytesIndex + check_end.BytesCount - check_start.BytesIndex).ToArray();
                     // 计算出校验
                     var data4 = ((Check)_check).Compute(data3); // 
                     // 计算校验
