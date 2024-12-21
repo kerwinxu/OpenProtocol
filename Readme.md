@@ -99,11 +99,23 @@ namespace Demo
             // 回复的
             byte[] data10 = { 0x01, 0x03, 0x02, 0x19, 0x98, 0xb2, 0x7e};
             var obj2 = bytesSerializer.Deserialize<ModbusResponse>(data10,0, ref end_index);
-            Console.WriteLine($"{obj2.Data[0]}");
+            Console.WriteLine($"{Convert.ToString(obj2.Data[0], 16)}");
+
+            // 这里添加一个更多的数组
+            byte[] data20 = { 0x01,
+                0x01, 0x03, 0x02, 0x19, 0x98, 0xb2, 0x7e ,
+                0x01, 0x03, 0x02, 0x19, 0x98, 0xb2, 0x7e ,
+                0x7e
+            };
+            var obj3 = bytesSerializer.Deserializes<ModbusResponse>(data20, 0, ref end_index);
+            Console.WriteLine($"count; {obj3.Count}, end_index:{end_index}");
+
+
 
         }
     }
 }
+
 
 
 
